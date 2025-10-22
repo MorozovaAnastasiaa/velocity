@@ -1,0 +1,40 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: AnastasiaM
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column: {name: name, value: "admin"}
+              - column: {name: email, value: "admin@velocity.ru"}
+              - column: {name: password, value: "password123"}
+
+        - insert:
+            tableName: users
+            columns:
+              - column: {name: name, value: "developer"}
+              - column: {name: email, value: "dev@velocity.ru"}
+              - column: {name: password, value: "password123"}
+
+  - changeSet:
+      id: 2
+      author: AnastasiaM
+      changes:
+        - insert:
+            tableName: projects
+            columns:
+              - column: {name: name, value: "Velocity Development"}
+              - column: {name: user_id, value: 1}
+
+  - changeSet:
+      id: 3
+      author: AnastasiaM
+      changes:
+        - insert:
+            tableName: tasks
+            columns:
+              - column: {name: name, value: "Setup database"}
+              - column: {name: description, value: "Configure PostgreSQL with Liquibase"}
+              - column: {name: project_id, value: 1}
+              - column: {name: executor_id, value: 2}

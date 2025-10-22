@@ -1,0 +1,115 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: AnastasiaM
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+              - column:
+                  name: email
+                  type: varchar(100)
+              - column:
+                  name: password
+                  type: varchar(255)
+
+  - changeSet:
+      id: 2
+      author: AnastasiaM
+      changes:
+        - createTable:
+            tableName: projects
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+              - column:
+                  name: user_id
+                  type: bigint
+  - changeSet:
+      id: 3
+      author: AnastasiaM
+      changes:
+        - createTable:
+            tableName: tasks
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: text
+              - column:
+                  name: start_date
+                  type: date
+              - column:
+                  name: deadline
+                  type: date
+              - column:
+                  name: executor_id
+                  type: bigint
+              - column:
+                  name: project_id
+                  type: bigint
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValue: "now()"
+  - changeSet:
+      id: 4
+      author: AnastasiaM
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: projects
+            baseColumnNames: user_id
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: fk_projects_user
+
+  - changeSet:
+      id: 5
+      author: AnastasiaM
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: tasks
+            baseColumnNames: executor_id
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: fk_tasks_executor
+
+  - changeSet:
+      id: 6
+      author: AnastasiaM
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: tasks
+            baseColumnNames: project_id
+            referencedTableName: projects
+            referencedColumnNames: id
+            constraintName: fk_tasks_project
