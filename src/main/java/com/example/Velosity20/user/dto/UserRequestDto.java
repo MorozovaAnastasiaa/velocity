@@ -11,6 +11,10 @@ public record UserRequestDto(
         String name,
 
         @NotEmpty
+        @Size(min = 1, max = 30, message = "The name is too short or too long")
+        String username,
+
+        @NotEmpty
         @Email
         @Size(max = 50, message = "The email is too long")
         String email,

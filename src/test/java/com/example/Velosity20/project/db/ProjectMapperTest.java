@@ -29,7 +29,7 @@ class ProjectMapperTest {
 
     @Test
     void toResponse() {
-        UserEntity userEntity = new UserEntity("nastya", "n@gmail.com", "12345");
+        UserEntity userEntity = new UserEntity("nastya",  "nastya", "n@gmail.com", "12345");
         userEntity.setId(ID);
         ProjectEntity projectEntity = new ProjectEntity("project1", userEntity);
         projectEntity.setId(ID);
@@ -40,7 +40,7 @@ class ProjectMapperTest {
 
     @Test
     void toEntity() {
-        UserEntity userEntity = new UserEntity("nastya", "n@gmail.com", "12345");
+        UserEntity userEntity = new UserEntity("nastya",  "nastya", "n@gmail.com", "12345");
         ProjectRequestDto requestDto = new ProjectRequestDto("project1", ID);
         userEntity.setId(ID);
         ProjectEntity projectEntity = new ProjectEntity("project1", userEntity);

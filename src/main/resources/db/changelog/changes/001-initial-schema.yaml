@@ -17,10 +17,16 @@ databaseChangeLog:
                   name: name
                   type: varchar(50)
               - column:
+                  name: username
+                  type: varchar(50)
+              - column:
                   name: email
                   type: varchar(100)
               - column:
                   name: password
+                  type: varchar(255)
+              - column:
+                  name: role
                   type: varchar(255)
 
   - changeSet:

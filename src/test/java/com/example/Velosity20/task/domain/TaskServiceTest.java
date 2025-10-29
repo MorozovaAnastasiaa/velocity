@@ -43,7 +43,7 @@ class TaskServiceTest {
     @Test
     void findById() {
         Long id = 1L;
-        UserEntity userEntity = new UserEntity("nastya", "n@gmail.com", "12345");
+        UserEntity userEntity = new UserEntity("nastya", "nastya", "n@gmail.com", "12345");
         ProjectEntity projectEntity = new ProjectEntity("project1", userEntity);
         TaskEntity taskEntity = new TaskEntity("name", "description", LocalDate.now(),
                 LocalDate.now().plusDays(2L), userEntity, projectEntity);
@@ -63,7 +63,7 @@ class TaskServiceTest {
     @Test
     void createTask() {
         Long id = 1L;
-        UserEntity userEntity = new UserEntity("nastya", "n@gmail.com", "12345");
+        UserEntity userEntity = new UserEntity("nastya", "nastya", "n@gmail.com", "12345");
         ProjectEntity projectEntity = new ProjectEntity("project1", userEntity);
         TaskRequestDto requestDto = new TaskRequestDto("name", "description", LocalDate.now(),
                 LocalDate.now().plusDays(2L), 1L, 1L);

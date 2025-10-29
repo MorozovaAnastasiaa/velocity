@@ -36,7 +36,7 @@ class TaskMapperTest {
 
     @Test
     void toResponse() {
-        UserEntity userEntity = new UserEntity("nastya", "n@gmail.com", "12345");
+        UserEntity userEntity = new UserEntity("nastya",  "nastya", "n@gmail.com", "12345");
         userEntity.setId(ID);
 
         ProjectEntity projectEntity = new ProjectEntity("project1", userEntity);
@@ -56,7 +56,7 @@ class TaskMapperTest {
 
     @Test
     void toEntity() {
-        UserEntity userEntity = new UserEntity("nastya", "n@gmail.com", "12345");
+        UserEntity userEntity = new UserEntity("nastya",  "nastya", "n@gmail.com", "12345");
         userEntity.setId(ID);
 
         ProjectEntity projectEntity = new ProjectEntity("project1", userEntity);
@@ -91,7 +91,7 @@ class TaskMapperTest {
 
     @Test
     void toEntity_ShouldThrowException_WhenProjectNotFound() {
-        UserEntity userEntity = new UserEntity("nastya", "n@gmail.com", "12345");
+        UserEntity userEntity = new UserEntity("nastya", "nastya", "n@gmail.com", "12345");
         userEntity.setId(ID);
 
         TaskRequestDto requestDto = new TaskRequestDto("name", "description", LocalDate.now(),

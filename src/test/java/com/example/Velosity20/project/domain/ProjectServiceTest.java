@@ -37,6 +37,7 @@ class ProjectServiceTest {
     private static final Long PROJECT_ID_1 = 1L;
     private static final Long PROJECT_ID_2 = 2L;
     private static final String USER_NAME = "nastya";
+    private static final String USER_USERNAME = "nastya";
     private static final String USER_EMAIL = "n@gmail.com";
     private static final String USER_PASSWORD = "12345";
     private static final String PROJECT_NAME_1 = "project1";
@@ -44,7 +45,7 @@ class ProjectServiceTest {
 
     @Test
     void findAll_ShouldReturnProjects_WithPaginationAndFilter() {
-        UserEntity user1 = new UserEntity(USER_NAME, USER_EMAIL, USER_PASSWORD);
+        UserEntity user1 = new UserEntity(USER_NAME, USER_USERNAME, USER_EMAIL, USER_PASSWORD);
 
         ProjectEntity project1 = new ProjectEntity(PROJECT_NAME_1, user1);
         ProjectEntity project2 = new ProjectEntity(PROJECT_NAME_2, user1);
@@ -70,7 +71,7 @@ class ProjectServiceTest {
 
     @Test
     void findById_ShouldReturnProject_WhenProjectExists() {
-        UserEntity userEntity = new UserEntity(USER_NAME, USER_EMAIL, USER_PASSWORD);
+        UserEntity userEntity = new UserEntity(USER_NAME, USER_USERNAME, USER_EMAIL, USER_PASSWORD);
         ProjectEntity projectEntity = new ProjectEntity(PROJECT_NAME_1, userEntity);
         ProjectResponseDto responseDto = new ProjectResponseDto(PROJECT_ID_1, PROJECT_NAME_1, USER_ID);
         when(repository.findById(PROJECT_ID_1)).thenReturn(Optional.of(projectEntity));
@@ -94,7 +95,7 @@ class ProjectServiceTest {
 
     @Test
     void createProject_ShouldSaveAndReturnProject() {
-        UserEntity userEntity = new UserEntity(USER_NAME, USER_EMAIL, USER_PASSWORD);
+        UserEntity userEntity = new UserEntity(USER_NAME, USER_USERNAME, USER_EMAIL, USER_PASSWORD);
         ProjectRequestDto requestDto = new ProjectRequestDto(PROJECT_NAME_1, USER_ID);
         ProjectEntity projectEntity = new ProjectEntity(PROJECT_NAME_1, userEntity);
         ProjectResponseDto responseDto = new ProjectResponseDto(PROJECT_ID_1, PROJECT_NAME_1, USER_ID);
@@ -113,7 +114,7 @@ class ProjectServiceTest {
 
     @Test
     void deleteProject_ShouldDeleteProject_WhenProjectExists() {
-        UserEntity userEntity = new UserEntity(USER_NAME, USER_EMAIL, USER_PASSWORD);
+        UserEntity userEntity = new UserEntity(USER_NAME, USER_USERNAME, USER_EMAIL, USER_PASSWORD);
         ProjectEntity projectEntity = new ProjectEntity(PROJECT_NAME_1, userEntity);
         when(repository.findById(PROJECT_ID_1)).thenReturn(Optional.of(projectEntity));
 
@@ -135,7 +136,7 @@ class ProjectServiceTest {
 
     @Test
     void updateProject_ShouldUpdateAndReturnProject_WhenProjectExists() {
-        UserEntity userEntity = new UserEntity(USER_NAME, USER_EMAIL, USER_PASSWORD);
+        UserEntity userEntity = new UserEntity(USER_NAME, USER_USERNAME, USER_EMAIL, USER_PASSWORD);
         ProjectRequestDto requestDto = new ProjectRequestDto(PROJECT_NAME_1, USER_ID);
         ProjectEntity projectEntity = new ProjectEntity(PROJECT_NAME_1, userEntity);
         projectEntity.setId(PROJECT_ID_1);
@@ -167,7 +168,7 @@ class ProjectServiceTest {
 
     @Test
     void findProjectsByUserId_ShouldReturnProjects_WhenUserHasProjects() {
-        UserEntity user1 = new UserEntity(USER_NAME, USER_EMAIL, USER_PASSWORD);
+        UserEntity user1 = new UserEntity(USER_NAME, USER_USERNAME, USER_EMAIL, USER_PASSWORD);
 
         ProjectEntity project1 = new ProjectEntity(PROJECT_NAME_1, user1);
         ProjectEntity project2 = new ProjectEntity(PROJECT_NAME_2, user1);

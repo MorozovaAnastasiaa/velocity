@@ -18,23 +18,30 @@ public class UserEntity {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "username")
+    private String username;
+
     @Column(name = "email")
     private String email;
 
     @Column(name = "password")
     private String password;
 
+    @Enumerated(EnumType.STRING)
+    private UserRole role = UserRole.ROLE_USER;
+
     @OneToMany(mappedBy = "userEntity", cascade = CascadeType.REMOVE)
     private List<ProjectEntity> projectEntities;
 
-    @OneToMany(mappedBy = "executor")
+    @OneToMany(mappedBy = "executor", cascade = CascadeType.REMOVE)
     private List<TaskEntity> taskEntityList;
 
     public UserEntity() {
     }
 
-    public UserEntity(String name, String email, String password) {
+    public UserEntity(String name, String username, String email, String password) {
         this.name = name;
+        this.username = username;
         this.email = email;
         this.password = password;
     }
@@ -86,4 +93,21 @@ public class UserEntity {
     public void setTaskList(List<TaskEntity> taskEntityList) {
         this.taskEntityList = taskEntityList;
     }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }
+

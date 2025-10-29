@@ -6,16 +6,29 @@ databaseChangeLog:
         - insert:
             tableName: users
             columns:
-              - column: {name: name, value: "admin"}
+              - column: {name: name, value: "user"}
+              - column: {name: username, value: "user"}
               - column: {name: email, value: "admin@velocity.ru"}
-              - column: {name: password, value: "password123"}
+              - column: {name: password, value: "{noop}user"}
+              - column: {name: role, value: "ROLE_USER"}
 
         - insert:
             tableName: users
             columns:
               - column: {name: name, value: "developer"}
+              - column: {name: username, value: "developer" }
               - column: {name: email, value: "dev@velocity.ru"}
-              - column: {name: password, value: "password123"}
+              - column: {name: password, value: "{noop}developer"}
+              - column: {name: role, value: "ROLE_USER" }
+        - insert:
+            tableName: users
+            columns:
+              - column: { name: name, value: "admin" }
+              - column: { name: username, value: "admin" }
+              - column: { name: email, value: "dev@velocity.ru" }
+              - column: { name: password, value: "{noop}admin" }
+              - column: { name: role, value: "ROLE_ADMIN" }
+
 
   - changeSet:
       id: insert-into-projects

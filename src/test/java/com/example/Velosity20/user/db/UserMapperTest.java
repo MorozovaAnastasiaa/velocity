@@ -15,9 +15,9 @@ class UserMapperTest {
 
     @Test
     void toResponse() {
-        UserEntity userEntity = new UserEntity("nastya", "n@gmail.com", "12345");
+        UserEntity userEntity = new UserEntity("nastya",  "nastya", "n@gmail.com", "12345");
         userEntity.setId(ID);
-        UserResponseDto userResponseDto = new UserResponseDto(1L, "nastya","n@gmail.com");
+        UserResponseDto userResponseDto = new UserResponseDto(1L, "nastya", "nastya", "n@gmail.com");
 
         assertEquals(userResponseDto, mapper.toResponse(userEntity));
 
@@ -25,8 +25,8 @@ class UserMapperTest {
 
     @Test
     void toEntity() {
-        UserRequestDto requestDto = new UserRequestDto("nastya", "n@gmail.com", "12345");
-        UserEntity expectedEntity = new UserEntity("nastya", "n@gmail.com", "12345");
+        UserRequestDto requestDto = new UserRequestDto("nastya",  "nastya", "n@gmail.com", "12345");
+        UserEntity expectedEntity = new UserEntity("nastya",  "nastya", "n@gmail.com", "12345");
 
         UserEntity result = mapper.toEntity(requestDto);
 

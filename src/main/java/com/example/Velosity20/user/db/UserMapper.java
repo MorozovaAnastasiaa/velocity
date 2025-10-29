@@ -10,6 +10,7 @@ public class UserMapper {
         return new UserResponseDto(
                 user.getId(),
                 user.getName(),
+                user.getUsername(),
                 user.getEmail()
         );
     }
@@ -17,6 +18,7 @@ public class UserMapper {
     public UserEntity toEntity(UserRequestDto requestDto) {
         return new UserEntity(
                 requestDto.name(),
+                requestDto.username(),
                 requestDto.email(),
                 requestDto.password()
         );

@@ -7,13 +7,20 @@ import com.example.Velosity20.user.dto.UserFilterDto;
 import com.example.Velosity20.user.dto.UserRequestDto;
 import com.example.Velosity20.user.dto.UserResponseDto;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final UserMapper mapper;
@@ -43,6 +50,7 @@ public class UserService {
 
     public UserResponseDto createUser(UserRequestDto user) {
         UserEntity userToCreate = mapper.toEntity(user);
+        userToCreate.setPassword("{noop}" + user.password());
         return mapper.toResponse(userRepository.save(userToCreate));
     }
 
@@ -50,7 +58,6 @@ public class UserService {
         if (userRepository.findById(id).isEmpty()){
             throw new NoSuchElementException("Element with id = " + id + " not found");
         }
-
         userRepository.deleteById(id);
     }
 
@@ -62,5 +69,16 @@ public class UserService {
         UserEntity userToUpdate = mapper.toEntity(user);
         userToUpdate.setId(id);
         return mapper.toResponse(userRepository.save(userToUpdate));
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findByUsername(username)
+                .map(user -> new User(
+                        user.getUsername(),
+                        user.getPassword(),
+                        Collections.singleton(user.getRole())
+                ))
+                .orElseThrow(() -> new UsernameNotFoundException("Failed to retrieve user: " + username));
     }
 }
