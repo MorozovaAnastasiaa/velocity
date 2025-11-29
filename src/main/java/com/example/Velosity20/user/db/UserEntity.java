@@ -30,7 +30,7 @@ public class UserEntity {
     @Enumerated(EnumType.STRING)
     private UserRole role = UserRole.ROLE_USER;
 
-    @OneToMany(mappedBy = "userEntity", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<ProjectEntity> projectEntities;
 
     @OneToMany(mappedBy = "executor", cascade = CascadeType.REMOVE)

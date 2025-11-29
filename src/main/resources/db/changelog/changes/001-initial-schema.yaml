@@ -84,9 +84,33 @@ databaseChangeLog:
                   name: project_id
                   type: bigint
               - column:
+                  name: column_id
+                  type: bigint
+              - column:
                   name: created_at
                   type: timestamp
                   defaultValue: "now()"
+  - changeSet:
+      id: create-table-columns
+      author: AnastasiaM
+      changes:
+        - createTable:
+            tableName: columns
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+              - column:
+                  name: project_id
+                  type: bigint
+
   - changeSet:
       id: add-foreign-key-projects-on-user_id
       author: AnastasiaM
@@ -119,3 +143,25 @@ databaseChangeLog:
             referencedTableName: projects
             referencedColumnNames: id
             constraintName: fk_tasks_project
+
+  - changeSet:
+      id: add-foreign-key-tasks-on-column_id
+      author: AnastasiaM
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: tasks
+            baseColumnNames: column_id
+            referencedTableName: columns
+            referencedColumnNames: id
+            constraintName: fk_tasks_column
+
+  - changeSet:
+      id: add-foreign-key-columns-on-project_id
+      author: AnastasiaM
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: columns
+            baseColumnNames: project_id
+            referencedTableName: projects
+            referencedColumnNames: id
+            constraintName: fk_columns_project

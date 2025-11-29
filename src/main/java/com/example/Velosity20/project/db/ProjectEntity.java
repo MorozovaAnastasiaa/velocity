@@ -1,9 +1,9 @@
 package com.example.Velosity20.project.db;
 
+import com.example.Velosity20.column.db.ColumnEntity;
 import com.example.Velosity20.task.db.TaskEntity;
 import com.example.Velosity20.user.db.UserEntity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.persistence.Column;
 
@@ -22,17 +22,20 @@ public class ProjectEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private UserEntity userEntity;
+    private UserEntity user;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.REMOVE)
-    private List<TaskEntity> taskEntityList;
+    private List<ColumnEntity> columns;
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.REMOVE)
+    private List<TaskEntity> tasks;
 
     public ProjectEntity() {
     }
 
     public ProjectEntity(String name, UserEntity userEntity) {
         this.name = name;
-        this.userEntity = userEntity;
+        this.user = userEntity;
     }
 
     public Long getId() {
@@ -52,18 +55,34 @@ public class ProjectEntity {
     }
 
     public UserEntity getUser() {
-        return userEntity;
+        return user;
     }
 
     public void setUser(UserEntity userEntity) {
-        this.userEntity = userEntity;
+        this.user = userEntity;
     }
 
     public List<TaskEntity> getTaskList() {
-        return taskEntityList;
+        return tasks;
     }
 
     public void setTaskList(List<TaskEntity> taskEntityList) {
-        this.taskEntityList = taskEntityList;
+        this.tasks = taskEntityList;
+    }
+
+    public List<ColumnEntity> getColumns() {
+        return columns;
+    }
+
+    public void setColumns(List<ColumnEntity> columns) {
+        this.columns = columns;
+    }
+
+    public List<TaskEntity> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<TaskEntity> tasks) {
+        this.tasks = tasks;
     }
 }

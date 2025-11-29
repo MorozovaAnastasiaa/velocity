@@ -1,5 +1,6 @@
 package com.example.Velosity20.task.db;
 
+import com.example.Velosity20.column.db.ColumnEntity;
 import com.example.Velosity20.project.db.ProjectEntity;
 import com.example.Velosity20.user.db.UserEntity;
 import jakarta.persistence.*;
@@ -33,6 +34,10 @@ public class TaskEntity {
     @ManyToOne
     @JoinColumn(name = "project_id", referencedColumnName = "id")
     private ProjectEntity project;
+
+    @ManyToOne
+    @JoinColumn(name = "column_id", referencedColumnName = "id")
+    private ColumnEntity column;
 
     public TaskEntity() {
     }
@@ -100,5 +105,13 @@ public class TaskEntity {
 
     public void setProject(ProjectEntity projectEntity) {
         this.project = projectEntity;
+    }
+
+    public ColumnEntity getColumn() {
+        return column;
+    }
+
+    public void setColumn(ColumnEntity column) {
+        this.column = column;
     }
 }
