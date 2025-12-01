@@ -26,9 +26,9 @@ public class ColumnEntity {
     public ColumnEntity() {
     }
 
-    public ColumnEntity(Long id, String name) {
-        this.id = id;
+    public ColumnEntity(String name, ProjectEntity project) {
         this.name = name;
+        this.project = project;
     }
 
     public Long getId() {
