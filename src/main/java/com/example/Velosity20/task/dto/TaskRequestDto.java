@@ -21,6 +21,8 @@ public record TaskRequestDto(
 
         Long executorId,
 
-        Long projectId
+        Long projectId,
+
+        Long columnId
 ) {
 }

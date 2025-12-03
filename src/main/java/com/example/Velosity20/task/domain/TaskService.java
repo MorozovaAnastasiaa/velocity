@@ -32,7 +32,7 @@ public class TaskService {
                 .withPage(pageNumber);
 
         return taskRepository.findAllByFilter(filterDto.executorId(), filterDto.projectId(), pageable).stream()
-                .map(task -> mapper.toResponse(task))
+                .map(mapper::toResponse)
                 .toList();
     }
 
@@ -66,13 +66,13 @@ public class TaskService {
 
     public List<TaskResponseDto> findTasksByUserId(Long id) {
         return taskRepository.findTasksByUserId(id).stream()
-                .map(task -> mapper.toResponse(task))
+                .map(mapper::toResponse)
                 .toList();
     }
 
     public List<TaskResponseDto> findTasksByProjectId(Long id) {
         return taskRepository.findTasksByProjectId(id).stream()
-                .map(task -> mapper.toResponse(task))
+                .map(mapper::toResponse)
                 .toList();
     }
 }

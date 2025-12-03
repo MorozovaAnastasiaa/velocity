@@ -59,9 +59,9 @@ class TaskControllerTest {
     void findAllByFilter() throws Exception {
         List<TaskResponseDto> responseDtoList = List.of(
                 new TaskResponseDto(ID1, "name1", "description1", LocalDate.now(),
-                        LocalDate.now().plusDays(2L), ID1, ID2),
+                        LocalDate.now().plusDays(2L), ID1, ID2, ID1),
                 new TaskResponseDto(ID2, "name2", "description2", LocalDate.now(),
-                        LocalDate.now().plusDays(2L), ID1, ID2)
+                        LocalDate.now().plusDays(2L), ID1, ID2, ID1)
         );
         when(service.findAllByFilter(any(TaskFilterDto.class))).thenReturn(responseDtoList);
 
@@ -86,7 +86,7 @@ class TaskControllerTest {
     @Test
     void findById() throws Exception {
         TaskResponseDto responseDto = new TaskResponseDto(ID1, "name1", "description1", LocalDate.now(),
-                LocalDate.now().plusDays(2L), ID1, ID1);
+                LocalDate.now().plusDays(2L), ID1, ID1, ID1);
         when(service.findById(ID1)).thenReturn(responseDto);
 
         mockMvc.perform(get("/task/{id}", ID1))
@@ -103,9 +103,9 @@ class TaskControllerTest {
     void findTasksByUserId() throws Exception {
         List<TaskResponseDto> responseDtoList = List.of(
                 new TaskResponseDto(ID1, "name1", "description1", LocalDate.now(),
-                        LocalDate.now().plusDays(2L), ID1, ID2),
+                        LocalDate.now().plusDays(2L), ID1, ID2, ID1),
                 new TaskResponseDto(ID2, "name2", "description2", LocalDate.now(),
-                        LocalDate.now().plusDays(2L), ID1, ID2)
+                        LocalDate.now().plusDays(2L), ID1, ID2, ID1)
         );
         when(service.findTasksByUserId(ID1)).thenReturn(responseDtoList);
 
@@ -125,9 +125,9 @@ class TaskControllerTest {
     void findTasksByProjectId() throws Exception {
         List<TaskResponseDto> responseDtoList = List.of(
                 new TaskResponseDto(ID1, "name1", "description1", LocalDate.now(),
-                        LocalDate.now().plusDays(2L), ID1, ID2),
+                        LocalDate.now().plusDays(2L), ID1, ID2, ID1),
                 new TaskResponseDto(ID2, "name2", "description2", LocalDate.now(),
-                        LocalDate.now().plusDays(2L), ID1, ID2)
+                        LocalDate.now().plusDays(2L), ID1, ID2, ID1)
         );
         when(service.findTasksByProjectId(ID2)).thenReturn(responseDtoList);
 
@@ -146,10 +146,10 @@ class TaskControllerTest {
     @Test
     void createTask() throws Exception {
         TaskRequestDto requestDto = new TaskRequestDto("name1", "description1", LocalDate.now(),
-                LocalDate.now().plusDays(2L), ID1, ID1);
+                LocalDate.now().plusDays(2L), ID1, ID1, ID1);
         String requestJson = objectMapper.writeValueAsString(requestDto);
         TaskResponseDto responseDto = new TaskResponseDto(ID1, "name1", "description1", LocalDate.now(),
-                LocalDate.now().plusDays(2L), ID1, ID1);
+                LocalDate.now().plusDays(2L), ID1, ID1, ID1);
         when(service.createTask(any(TaskRequestDto.class))).thenReturn(responseDto);
 
         mockMvc.perform(post("/task")
@@ -173,10 +173,10 @@ class TaskControllerTest {
     @Test
     void updateTask() throws Exception {
         TaskRequestDto requestDto = new TaskRequestDto("name1", "description1", LocalDate.now(),
-                LocalDate.now().plusDays(2L), ID1, ID1);
+                LocalDate.now().plusDays(2L), ID1, ID1, ID1);
         String requestJson = objectMapper.writeValueAsString(requestDto);
         TaskResponseDto responseDto = new TaskResponseDto(ID1, "name1", "description1", LocalDate.now(),
-                LocalDate.now().plusDays(2L), ID1, ID1);
+                LocalDate.now().plusDays(2L), ID1, ID1, ID1);
         when(service.updateProject(eq(ID1), any(TaskRequestDto.class))).thenReturn(responseDto);
 
         mockMvc.perform(put("/task/{id}", ID1)

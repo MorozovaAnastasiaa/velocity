@@ -2,13 +2,14 @@
 
 -- changeset amorozova:1
 INSERT INTO users (name, username, email, password, role) VALUES
-('user', 'user', 'admin@velocity.ru', '{noop}user', 'ROLE_USER'),
-('developer', 'developer', 'dev@velocity.ru', '{noop}developer', 'ROLE_USER'),
-('admin', 'admin', 'dev@velocity.ru', '{noop}admin', 'ROLE_ADMIN');
+('user', 'user', 'admin@velocity.ru', '$2a$12$ek8UUHtoFf0K5iRzLigDjOgOhj0h2g9VYlRlGMMDwHKh1bsNMMqVy', 'ROLE_USER'),
+('developer', 'developer', 'dev@velocity.ru', '$2a$12$ek8UUHtoFf0K5iRzLigDjOgOhj0h2g9VYlRlGMMDwHKh1bsNMMqVy', 'ROLE_USER'),
+('admin', 'admin', 'dev@velocity.ru', '$2a$12$ek8UUHtoFf0K5iRzLigDjOgOhj0h2g9VYlRlGMMDwHKh1bsNMMqVy', 'ROLE_ADMIN');
 
 -- changeset amorozova:2
 INSERT INTO projects (name, user_id) VALUES
-('Velocity Development', 1);
+('Velocity Development', 1),
+('SomeProject Development', 2);
 
 -- changeset amorozova:3
 INSERT INTO columns (name, project_id) VALUES

@@ -9,6 +9,7 @@ public record TaskResponseDto(
         LocalDate startDate,
         LocalDate deadline,
         Long executorId,
-        Long projectId
+        Long projectId,
+        Long columnId
 ) {
 }

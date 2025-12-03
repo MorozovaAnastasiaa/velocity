@@ -42,13 +42,21 @@ public class TaskEntity {
     public TaskEntity() {
     }
 
-    public TaskEntity(String name, String description, LocalDate startDate, LocalDate deadline, UserEntity executor, ProjectEntity projectEntity) {
+    public TaskEntity(
+            String name,
+            String description,
+            LocalDate startDate,
+            LocalDate deadline,
+            UserEntity executor,
+            ProjectEntity projectEntity,
+            ColumnEntity column) {
         this.name = name;
         this.description = description;
         this.startDate = startDate;
         this.deadline = deadline;
         this.executor = executor;
         this.project = projectEntity;
+        this.column = column;
     }
 
     public Long getId() {

@@ -1,12 +1,13 @@
 package com.example.Velosity20.task.db;
 
+import com.example.Velosity20.column.db.ColumnEntity;
+import com.example.Velosity20.column.db.ColumnRepository;
 import com.example.Velosity20.project.db.ProjectEntity;
 import com.example.Velosity20.project.db.ProjectRepository;
 import com.example.Velosity20.task.dto.TaskRequestDto;
 import com.example.Velosity20.task.dto.TaskResponseDto;
 import com.example.Velosity20.user.db.UserEntity;
 import com.example.Velosity20.user.db.UserRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -31,6 +32,9 @@ class TaskMapperTest {
     @Mock
     ProjectRepository projectRepository;
 
+    @Mock
+    ColumnRepository columnRepository;
+
     @InjectMocks
     TaskMapper mapper;
 
@@ -42,12 +46,16 @@ class TaskMapperTest {
         ProjectEntity projectEntity = new ProjectEntity("project1", userEntity);
         projectEntity.setId(ID);
 
+        ColumnEntity columnEntity = new ColumnEntity("Done", projectEntity);
+        columnEntity.setId(ID);
+
+
         TaskEntity taskEntity = new TaskEntity("name", "description", LocalDate.now(),
-                LocalDate.now().plusDays(2L), userEntity, projectEntity);
+                LocalDate.now().plusDays(2L), userEntity, projectEntity, columnEntity);
         taskEntity.setId(ID);
 
         TaskResponseDto expectedDto = new TaskResponseDto(ID, "name", "description",
-                LocalDate.now(), LocalDate.now().plusDays(2L), ID, ID);
+                LocalDate.now(), LocalDate.now().plusDays(2L), ID, ID, ID);
 
         TaskResponseDto result = mapper.toResponse(taskEntity);
 
@@ -62,11 +70,15 @@ class TaskMapperTest {
         ProjectEntity projectEntity = new ProjectEntity("project1", userEntity);
         projectEntity.setId(ID);
 
+        ColumnEntity columnEntity = new ColumnEntity("column1", projectEntity);
+        projectEntity.setId(ID);
+
         TaskRequestDto requestDto = new TaskRequestDto("name", "description", LocalDate.now(),
-                LocalDate.now().plusDays(2L), ID, ID);
+                LocalDate.now().plusDays(2L), ID, ID, ID);
 
         when(userRepository.findById(ID)).thenReturn(Optional.of(userEntity));
         when(projectRepository.findById(ID)).thenReturn(Optional.of(projectEntity));
+        when(columnRepository.findById(ID)).thenReturn(Optional.of(columnEntity));
 
         TaskEntity result = mapper.toEntity(requestDto);
 
@@ -82,7 +94,7 @@ class TaskMapperTest {
     @Test
     void toEntity_ShouldThrowException_WhenUserNotFound() {
         TaskRequestDto requestDto = new TaskRequestDto("name", "description", LocalDate.now(),
-                LocalDate.now().plusDays(2L), ID, ID);
+                LocalDate.now().plusDays(2L), ID, ID, ID);
 
         when(userRepository.findById(ID)).thenReturn(Optional.empty());
 
@@ -95,7 +107,7 @@ class TaskMapperTest {
         userEntity.setId(ID);
 
         TaskRequestDto requestDto = new TaskRequestDto("name", "description", LocalDate.now(),
-                LocalDate.now().plusDays(2L), ID, ID);
+                LocalDate.now().plusDays(2L), ID, ID, ID);
 
         when(userRepository.findById(ID)).thenReturn(Optional.of(userEntity));
         when(projectRepository.findById(ID)).thenReturn(Optional.empty());

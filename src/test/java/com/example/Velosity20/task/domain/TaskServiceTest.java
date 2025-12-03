@@ -1,5 +1,6 @@
 package com.example.Velosity20.task.domain;
 
+import com.example.Velosity20.column.db.ColumnEntity;
 import com.example.Velosity20.project.db.ProjectEntity;
 import com.example.Velosity20.project.dto.ProjectRequestDto;
 import com.example.Velosity20.project.dto.ProjectResponseDto;
@@ -9,6 +10,7 @@ import com.example.Velosity20.task.db.TaskRepository;
 import com.example.Velosity20.task.dto.TaskRequestDto;
 import com.example.Velosity20.task.dto.TaskResponseDto;
 import com.example.Velosity20.user.db.UserEntity;
+import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -45,11 +47,12 @@ class TaskServiceTest {
         Long id = 1L;
         UserEntity userEntity = new UserEntity("nastya", "nastya", "n@gmail.com", "12345");
         ProjectEntity projectEntity = new ProjectEntity("project1", userEntity);
+        ColumnEntity columnEntity = new ColumnEntity("Done", projectEntity);
         TaskEntity taskEntity = new TaskEntity("name", "description", LocalDate.now(),
-                LocalDate.now().plusDays(2L), userEntity, projectEntity);
+                LocalDate.now().plusDays(2L), userEntity, projectEntity, columnEntity);
 
         TaskResponseDto responseDto = new TaskResponseDto(1L, "name", "description", LocalDate.now(),
-                LocalDate.now().plusDays(2L), 1L, 1L);
+                LocalDate.now().plusDays(2L), 1L, 1L, 1L);
 
         when(repository.findById(id)).thenReturn(Optional.of(taskEntity));
         when(mapper.toResponse(taskEntity)).thenReturn(responseDto);
@@ -65,12 +68,13 @@ class TaskServiceTest {
         Long id = 1L;
         UserEntity userEntity = new UserEntity("nastya", "nastya", "n@gmail.com", "12345");
         ProjectEntity projectEntity = new ProjectEntity("project1", userEntity);
+        ColumnEntity columnEntity = new ColumnEntity("Done", projectEntity);
         TaskRequestDto requestDto = new TaskRequestDto("name", "description", LocalDate.now(),
-                LocalDate.now().plusDays(2L), 1L, 1L);
+                LocalDate.now().plusDays(2L), 1L, 1L, 1L);
         TaskEntity taskEntity = new TaskEntity("name", "description", LocalDate.now(),
-                LocalDate.now().plusDays(2L), userEntity, projectEntity);
+                LocalDate.now().plusDays(2L), userEntity, projectEntity, columnEntity);
         TaskResponseDto responseDto = new TaskResponseDto(1L, "name", "description", LocalDate.now(),
-                LocalDate.now().plusDays(2L), 1L, 1L);
+                LocalDate.now().plusDays(2L), 1L, 1L, 1L);
 
         when(mapper.toEntity(requestDto)).thenReturn(taskEntity);
         when(repository.save(taskEntity)).thenReturn(taskEntity);
