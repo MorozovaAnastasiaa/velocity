@@ -21,7 +21,7 @@ import java.util.List;
 @RequestMapping("/task")
 public class TaskController {
 
-    private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+    private static final Logger log = LoggerFactory.getLogger(TaskController.class);
 
     private final TaskService service;
 

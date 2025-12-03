@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/column")
 public class ColumnController {
-    private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+    private static final Logger log = LoggerFactory.getLogger(ColumnController.class);
 
     private final ColumnService service;
 

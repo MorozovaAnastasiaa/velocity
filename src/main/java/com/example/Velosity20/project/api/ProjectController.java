@@ -18,7 +18,7 @@ import java.util.List;
 @RequestMapping("/project")
 public class ProjectController {
 
-    private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+    private static final Logger log = LoggerFactory.getLogger(ProjectController.class);
 
     private final ProjectService service;
 
